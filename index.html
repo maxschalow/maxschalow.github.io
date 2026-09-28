@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Max Schalow</title>
-<meta name="description" content="Max Schalow — founder and operator.">
+<meta name="description" content="Max Schalow — founder, operator and community builder. Co-founder of SELANA, Fleetser, bondi and Amsterdam Tech Week. Forbes 30 Under 30 Europe.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23111'/><text x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-size='34' fill='%23f4f1ea'>M</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,20 +27,16 @@
     }
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; }
   body {
     background: var(--bg);
     color: var(--ink);
     font-family: Inter, system-ui, -apple-system, sans-serif;
     font-size: 17px;
     line-height: 1.6;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 48px 24px;
+    padding: 12vh 24px 64px;
     -webkit-font-smoothing: antialiased;
   }
-  main { width: 100%; max-width: 560px; }
+  main { width: 100%; max-width: 600px; margin: 0 auto; }
   h1 {
     font-family: Fraunces, Georgia, serif;
     font-weight: 600;
@@ -54,14 +50,33 @@
     font-size: 0.95rem;
     letter-spacing: 0.02em;
   }
-  .bio {
+  .intro {
     margin-top: 32px;
     padding-top: 32px;
     border-top: 1px solid var(--line);
   }
-  .bio p + p { margin-top: 14px; }
+  .intro p + p { margin-top: 14px; }
+  h2 {
+    margin-top: 48px;
+    margin-bottom: 8px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  ul { list-style: none; }
+  li {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  li:last-child { border-bottom: 0; }
+  .name { font-weight: 500; }
+  .name span { color: var(--muted); font-weight: 400; }
+  .desc { color: var(--muted); font-size: 0.95rem; margin-top: 2px; }
+  a { color: inherit; }
   nav {
-    margin-top: 36px;
+    margin-top: 48px;
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
@@ -89,12 +104,44 @@
 <body>
 <main>
   <h1>Max Schalow</h1>
-  <p class="role">Founder &amp; operator</p>
+  <p class="role">Founder, operator &amp; community builder &middot; Forbes 30 Under 30 Europe</p>
 
-  <section class="bio">
-    <p>I build and run companies at the intersection of mobility and technology, from e-mobility and fleet operations to what comes next.</p>
-    <p>I've lived and worked across the Netherlands, Germany and the UK, and I like problems where operations, regulation and product meet.</p>
+  <section class="intro">
+    <p>I build companies in e-mobility and help founders find each other. I started my first company as a student, and I've been doing things people said were impossible ever since.</p>
+    <p>I've also angel invested in a few early-stage companies, and I enjoy working with founders who are building something ambitious.</p>
   </section>
+
+  <h2>Building</h2>
+  <ul>
+    <li>
+      <div class="name">SELANA <span>&middot; Co-founder &amp; COO</span></div>
+      <div class="desc">Built the first and only street-legal e-step in the Netherlands, creating a new vehicle category after six years of type-approval work.</div>
+    </li>
+    <li>
+      <div class="name">Fleetser <span>&middot; Co-founder</span></div>
+      <div class="desc">A marketplace for buying and selling light electric vehicle fleets. 30,000+ vehicles sold.</div>
+    </li>
+    <li>
+      <div class="name">bondi <span>&middot; Co-founder &amp; COO</span></div>
+      <div class="desc">Shared e-bikes, scaled from 0 to 8 cities and 100,000 users. Acquired by Svist in 2025.</div>
+    </li>
+  </ul>
+
+  <h2>Community</h2>
+  <ul>
+    <li>
+      <div class="name">Amsterdam Tech Week <span>&middot; Co-founder</span></div>
+      <div class="desc">Amsterdam's biggest startup and investor event, with 5,000+ attendees in 2026.</div>
+    </li>
+    <li>
+      <div class="name">FounderFuel <span>&middot; Co-founder</span></div>
+      <div class="desc">An invite-only community where Dutch founders and investors connect on a personal level.</div>
+    </li>
+    <li>
+      <div class="name">Graduate Entrepreneur <span>&middot; Mentor</span></div>
+      <div class="desc">Mentoring recent graduates as they start their own companies.</div>
+    </li>
+  </ul>
 
   <nav>
     <a class="primary" href="mailto:max@maxschalow.com">max@maxschalow.com</a>

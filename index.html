@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Max Schalow</title>
+<meta name="description" content="Max Schalow — founder and operator.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23111'/><text x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-size='34' fill='%23f4f1ea'>M</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f1ea;
+    --ink: #151515;
+    --muted: #6b675f;
+    --line: #d9d4c8;
+    --accent: #1f4d3a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121312;
+      --ink: #ecebe6;
+      --muted: #9a978f;
+      --line: #2b2c2a;
+      --accent: #8fc2a8;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Inter, system-ui, -apple-system, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    -webkit-font-smoothing: antialiased;
+  }
+  main { width: 100%; max-width: 560px; }
+  h1 {
+    font-family: Fraunces, Georgia, serif;
+    font-weight: 600;
+    font-size: clamp(2.4rem, 7vw, 3.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+  }
+  .role {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+  }
+  .bio {
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+  }
+  .bio p + p { margin-top: 14px; }
+  nav {
+    margin-top: 36px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  nav a {
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 10px 18px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    transition: border-color .15s, color .15s;
+  }
+  nav a:hover { border-color: var(--accent); color: var(--accent); }
+  nav a.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  nav a.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+  footer {
+    margin-top: 56px;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Max Schalow</h1>
+  <p class="role">Founder &amp; operator</p>
+
+  <section class="bio">
+    <p>I build and run companies at the intersection of mobility and technology, from e-mobility and fleet operations to what comes next.</p>
+    <p>I've lived and worked across the Netherlands, Germany and the UK, and I like problems where operations, regulation and product meet.</p>
+  </section>
+
+  <nav>
+    <a class="primary" href="mailto:max@maxschalow.com">max@maxschalow.com</a>
+    <a href="https://www.linkedin.com/in/maxschalow/" target="_blank" rel="noopener">LinkedIn</a>
+  </nav>
+
+  <footer>&copy; <span id="y">2026</span> Max Schalow</footer>
+</main>
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+</body>
+</html>

@@ -238,7 +238,7 @@
   #money i { background: linear-gradient(90deg, #ff3b3b, #7cff6b); }
   #prog i { background: linear-gradient(90deg, var(--cyan), var(--pink)); }
   #cv { width: min(900px, 100%); height: auto; border-radius: 16px; background: #0d0b2b; border: 2px solid #ffffff22; touch-action: manipulation; cursor: pointer; }
-  #ticker { width: min(900px, 100%); margin-top: 8px; min-height: 1.4em; color: var(--yellow); font-size: .9rem; text-align: center; }
+  #ticker { width: min(900px, 100%); margin-top: 10px; min-height: 2.8em; color: var(--yellow); font-size: 1.1rem; font-weight: 700; text-align: center; line-height: 1.35; }
   #game .help { color: var(--muted); font-size: .8rem; margin-top: 4px; text-align: center; }
 
   @media (prefers-reduced-motion: reduce) {
@@ -710,7 +710,7 @@ function fakeApproval() {
 
 /* ============ GAME: ROAD TO RDW ============ */
 const cv = $("#cv"), cx = cv.getContext("2d");
-let W = 900, H = 360, GROUND = 300, SCALE = 1;
+let W = 900, H = 360, GROUND = 300, SCALE = 1, FS = 1;
 const face = new Image(); face.src = "max.jpg";
 const HATERS = [
   { e: "🦹", t: "Scammer stole 250 scooters", money: -120000, msg: "🦹 A scammer ran off with 250 scooters. -€120k" },
@@ -720,6 +720,7 @@ const HATERS = [
   { e: "👵", t: "Get a real job!", money: -10000, msg: "👵 Parents called. Again. -€10k" },
   { e: "🚲", t: "NL has e-bikes, why e-steps?", money: -10000, msg: "🚲 \"We don't need e-steps, we have e-bikes.\" -€10k" }
 ];
+const FAKE_RULES = ["it must also pass a winter test", "the manual must be translated into Frisian", "it needs a second, backup bell", "we lost your file, please resubmit", "a new EU directive just dropped"];
 const RULES = ["Mirrors must be 3mm bigger", "Retest it in the rain", "The horn needs to be louder", "New form: 27B/6", "Brake light: more... red", "Kickstand must survive a storm", "Reflectors need reflectors", "Test it again. Just because"];
 const PROMISES = ["📣 Told customers: approval is almost there!", "📣 \"Just a few more weeks\" (month %m)", "📣 Pre-orders still open. Approval any day now!", "📣 Promised approval by summer. Which summer? Unclear."];
 let G = null, gameRAF;
@@ -731,7 +732,7 @@ function closeGame() { $("#game").classList.add("hidden"); cancelAnimationFrame(
 function newGame() {
   cancelAnimationFrame(gameRAF);
   const narrow = innerWidth < 640;
-  W = narrow ? 560 : 900; H = narrow ? 380 : 360; GROUND = H - 60; SCALE = W / 900;
+  W = narrow ? 560 : 900; H = narrow ? 380 : 360; GROUND = H - 60; SCALE = W / 900; FS = narrow ? 1.35 : 1;
   cv.width = W; cv.height = H;
   G = { state: "ready", y: GROUND, vy: 0, money: 300000, month: 0, goal: 72, speed: 330, obs: [], pops: [], spawn: 1.2, cash: 3.5, last: performance.now(), promise: 10, shake: 0, maxMoney: 300000, inspections: 0 };
   $("#ticker").textContent = "It's 2019. Riding an e-step in NL gets you a €400 fine. Let's fix that.";
@@ -757,7 +758,7 @@ function hud() {
 }
 function pop(text, x, y, color) { G.pops.push({ text, x, y, life: 1.4, color }); }
 function spawnObstacle() {
-  if (Math.random() < 0.22) {
+  if (Math.random() < 0.17) {
     const h = Math.random() < .5 ? 110 : 160;
     G.obs.push({ kind: "cash", x: W + 40, y: GROUND - h, w: 40, h: 40 });
     return;
@@ -771,15 +772,17 @@ function loop(now) {
   if (!G) return;
   const dt = Math.min(0.05, (now - G.last) / 1000); G.last = now;
   if (G.state === "run") step(dt);
+  else if (G.state === "fake") fakeStep(dt);
+  if (G.jk > 0) G.jk -= dt;
   draw(); gameRAF = requestAnimationFrame(loop);
 }
 function step(dt) {
-  G.month += dt * 2.2;
-  G.money -= dt * 2.2 * 4500;           // monthly burn
-  G.speed = (330 + G.month * 2.2) * (SCALE < 1 ? 0.8 : 1);
+  G.month += dt * 1.15;
+  G.money -= dt * 1.15 * 4500;           // monthly burn
+  G.speed = (250 + G.month * 1.6) * (SCALE < 1 ? 0.85 : 1);
   G.vy += 2200 * dt; G.y = Math.min(GROUND, G.y + G.vy * dt);
   G.spawn -= dt;
-  if (G.spawn <= 0) { spawnObstacle(); G.spawn = 0.85 + Math.random() * 0.9 - Math.min(.35, G.month / 300); }
+  if (G.spawn <= 0) { spawnObstacle(); G.spawn = 1.3 + Math.random() * 1.1 - Math.min(.45, G.month / 250); }
   if (G.month >= G.promise) { $("#ticker").textContent = PROMISES[Math.floor(Math.random() * PROMISES.length)].replace("%m", Math.floor(G.month)); G.promise += 14 + Math.random() * 8; }
   const px = 90, pw = 44, ph = 64, py = G.y - ph;
   for (const o of G.obs) {
@@ -788,7 +791,7 @@ function step(dt) {
     if (px < o.x + o.w && px + pw > o.x && py < o.y + o.h && py + ph > o.y) {
       o.hit = true;
       if (o.kind === "cash") {
-        const amt = 80000 + Math.round(Math.random() * 6) * 10000;
+        const amt = 60000 + Math.round(Math.random() * 5) * 10000;
         G.money += amt; G.maxMoney = Math.max(G.maxMoney, G.money);
         pop(`+€${amt / 1000}k investor!`, o.x, o.y - 10, "#7cff6b");
         $("#ticker").textContent = "💰 Found a new investor! Runway extended.";
@@ -807,11 +810,23 @@ function step(dt) {
   G.pops.forEach(p => { p.life -= dt; p.y -= 40 * dt; }); G.pops = G.pops.filter(p => p.life > 0);
   G.shake = Math.max(0, G.shake - dt);
   if (G.money <= 0) { G.money = 0; G.state = "over"; $("#ticker").textContent = "💸 Out of runway at month " + Math.floor(G.month) + ". Maybe the parents were right? (They weren't. Try again.)"; }
+  else if (G.month >= G.goal && !G.faked) {
+    G.faked = true; G.state = "fake"; G.fakeT = 2.6; rain(["✅", "🍾", "🎉"], 30);
+    $("#ticker").textContent = "✅ APPROVED!!! Pop the champagne! 🍾";
+  }
   else if (G.month >= G.goal) {
     G.state = "won"; rain(["✅", "🛴", "🎉", "📋"], 50);
     $("#ticker").textContent = `✅ APPROVED after ${(G.goal / 12).toFixed(1)} years and ${G.inspections} surprise inspection${G.inspections === 1 ? "" : "s"}. Welcome to the club.`;
   }
   hud();
+}
+function fakeStep(dt) {
+  G.fakeT -= dt;
+  if (G.fakeT <= 0) {
+    const r = FAKE_RULES[Math.floor(Math.random() * FAKE_RULES.length)];
+    G.goal += 12; G.state = "run"; G.jk = 2.5; G.shake = .5; G.last = performance.now();
+    $("#ticker").textContent = `🙃 Haha, just kidding. New rule: ${r}. +12 months.`;
+  }
 }
 function wrapText(t, max) {
   const words = t.split(" "), lines = []; let cur = "";
@@ -840,10 +855,10 @@ function draw() {
     if (o.hit && o.kind !== "cash") cx.globalAlpha = .35;
     cx.font = "40px serif"; cx.fillText(o.kind === "cash" ? "💰" : o.e, o.x + o.w / 2, o.y + o.h - 4);
     if (o.kind === "hater") {
-      const lines = wrapText(o.t, 18); cx.font = "bold 12px 'Space Grotesk', sans-serif";
-      const bw = Math.max(...lines.map(l => cx.measureText(l).width)) + 14, bh = lines.length * 15 + 8, bxx = o.x + o.w / 2 - bw / 2, byy = o.y - bh - 10;
+      const lines = wrapText(o.t, 16), LH = Math.round(19 * FS); cx.font = `bold ${Math.round(16 * FS)}px 'Space Grotesk', sans-serif`;
+      const bw = Math.max(...lines.map(l => cx.measureText(l).width)) + 16, bh = lines.length * LH + 10, bxx = o.x + o.w / 2 - bw / 2, byy = o.y - bh - 10;
       cx.fillStyle = o.goal ? "#ffd23f" : "#ffffff"; cx.beginPath(); cx.roundRect(bxx, byy, bw, bh, 8); cx.fill();
-      cx.fillStyle = "#15123a"; lines.forEach((l, i) => cx.fillText(l, o.x + o.w / 2, byy + 17 + i * 15));
+      cx.fillStyle = "#15123a"; lines.forEach((l, i) => cx.fillText(l, o.x + o.w / 2, byy + LH + i * LH - 2));
     }
     cx.globalAlpha = 1;
   }
@@ -856,20 +871,24 @@ function draw() {
   cx.restore();
   cx.strokeStyle = "#e8e6ff"; cx.lineWidth = 3; cx.beginPath(); cx.arc(px + 22, py - 52, 20, 0, Math.PI * 2); cx.stroke();
   // popups
-  cx.font = "bold 18px 'Space Grotesk', sans-serif";
+  cx.font = `bold ${Math.round(22 * FS)}px 'Space Grotesk', sans-serif`;
   for (const p of G.pops) { cx.globalAlpha = Math.min(1, p.life); cx.fillStyle = p.color; cx.fillText(p.text, p.x, p.y); }
   cx.globalAlpha = 1;
+  if (G.jk > 0) {
+    cx.globalAlpha = Math.min(1, G.jk); cx.fillStyle = "#ff5da2"; cx.font = `${Math.round(40 * FS)}px Bungee, sans-serif`;
+    cx.fillText("JUST KIDDING 🙃", W / 2, 110); cx.globalAlpha = 1;
+  }
   // overlays
   if (G.state !== "run") {
     cx.fillStyle = "#07061acc"; cx.fillRect(0, 0, W, H);
     cx.fillStyle = "#fff"; cx.font = "28px Bungee, sans-serif";
-    const title = G.state === "ready" ? "ROAD TO RDW" : G.state === "won" ? "APPROVED ✅" : "OUT OF RUNWAY 💸";
+    const title = G.state === "ready" ? "ROAD TO RDW" : (G.state === "won" || G.state === "fake") ? "APPROVED ✅" : "OUT OF RUNWAY 💸";
     cx.fillText(title, W / 2, 140);
-    cx.font = "16px 'Space Grotesk', sans-serif"; cx.fillStyle = "#b7b2d9";
-    const sub = G.state === "ready" ? "Survive 72 months of bureaucracy, haters and investors. Tap to start." :
+    cx.font = `${Math.round(17 * FS)}px 'Space Grotesk', sans-serif`; cx.fillStyle = "#b7b2d9";
+    const sub = G.state === "fake" ? "Congratulations! You did it! ...wait, the inspector is calling 📞" : G.state === "ready" ? "Survive 72 months of bureaucracy, haters and investors. Tap to start." :
       G.state === "won" ? `It took ${(G.goal / 12).toFixed(1)} years. In real life it took 6. Tap to play again.` :
       `You made it to month ${Math.floor(G.month)} of ${G.goal}. Tap to raise another round.`;
-    wrapText(sub, W < 700 ? 44 : 80).forEach((l, i) => cx.fillText(l, W / 2, 180 + i * 22));
+    wrapText(sub, W < 700 ? 34 : 80).forEach((l, i) => cx.fillText(l, W / 2, 180 + i * Math.round(24 * FS)));
   }
   cx.restore();
 }

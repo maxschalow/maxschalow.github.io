@@ -150,6 +150,8 @@
   }
   @keyframes pop { from { transform: scale(.6) rotate(-4deg); opacity: 0; } }
   .card .big { font-size: 64px; line-height: 1; }
+  .card .photo { display: block; width: calc(100% + 48px); margin: -28px -24px 0; height: 220px; object-fit: cover; border-radius: 22px 22px 0 0; }
+  .card { overflow-x: hidden; overflow-y: auto; max-height: calc(100vh - 32px); }
   .card h2 { font-family: Bungee, sans-serif; font-weight: 400; font-size: 1.6rem; margin-top: 12px; }
   .card .role { color: var(--yellow); font-weight: 700; margin-top: 4px; }
   .card p { color: var(--ink); margin-top: 14px; line-height: 1.55; }
@@ -215,23 +217,29 @@
 <script>
 const PLANETS = [
   { id: "selana", emoji: "🛴", name: "SELANA", role: "Co-founder & COO", c: "#ff5da2", ring: false,
+    img: "img/selana.jpg", url: "https://selana.nl", site: "selana.nl",
     text: "Built the first and only street-legal e-step in the Netherlands. That meant creating a whole new vehicle category, after six years of type-approval work.",
     lol: "Everyone said it was impossible. Turns out \"impossible\" just takes six years." },
   { id: "fleetser", emoji: "♻️", name: "Fleetser", role: "Co-founder", c: "#3ee6ff", ring: true,
+    img: "img/fleetser.jpg", url: "https://fleetser.com", site: "fleetser.com",
     text: "A marketplace for buying and selling light electric vehicle fleets. 30,000+ vehicles sold.",
-    lol: "Started as a side project with basically zero investment. Whoops." },
+    lol: "Started as a side project with basically zero investment. Now there's a greenhouse full of bikes. Whoops." },
   { id: "bondi", emoji: "🚲", name: "bondi", role: "Co-founder & COO", c: "#7cff6b", ring: false,
+    img: "img/bondi.jpg",
     text: "Shared e-bikes, scaled from 0 to 8 cities and 100,000 users. Acquired by Svist in 2025.",
     lol: "Also once \"knighted\" by a prince at a founder event. Sir bondi boyz." },
   { id: "atw", emoji: "🎪", name: "Amsterdam Tech Week", role: "Co-founder", c: "#ffd23f", ring: true,
+    img: "img/atw.jpg", url: "https://amstechweek.com/", site: "amstechweek.com",
     text: "Amsterdam's biggest startup and investor event, with 5,000+ attendees in 2026.",
-    lol: "Inspired by Miami Tech Week. Slightly less sunburn." },
+    lol: "Inspired by Miami Tech Week. Slightly less sunburn, slightly more cowboy hats." },
   { id: "ff", emoji: "🍸", name: "FounderFuel", role: "Co-founder", c: "#b388ff", ring: false,
+    img: "img/founderfuel.jpg", url: "https://founderfuel.vc", site: "founderfuel.vc",
     text: "An invite-only community where Dutch founders and investors connect on a personal level, and in a fun way.",
-    lol: "Fewer pitch decks, more cocktails." },
-  { id: "angel", emoji: "😇", name: "Angel investing", role: "Angel investor", c: "#ff9f43", ring: true,
+    lol: "Fewer pitch decks, more cocktails. Matching hoodies mandatory." },
+  { id: "angel", emoji: "🍔", name: "Angel investing", role: "Angel investor", c: "#ff9f43", ring: true,
+    url: "https://www.linkedin.com/company/80480862", site: "the holding",
     text: "I've angel invested in a few early-stage companies, and I enjoy working with founders who are building something ambitious.",
-    lol: "Halo sold separately." }
+    lol: "All investments go through XtraLongChiliCheese Holding B.V., named after my favourite burger. Serious investor, serious priorities." }
 ];
 
 const LINES = [
@@ -286,12 +294,15 @@ function openPlanet(p) {
   const first = !seen.has(p.id);
   seen.add(p.id);
   $("#card").innerHTML = `
-    <div class="big">${p.emoji}</div>
+    ${p.img ? `<img class="photo" src="${p.img}" alt="${p.name}">` : `<div class="big">${p.emoji}</div>`}
     <h2>${p.name}</h2>
     <div class="role">${p.role}</div>
     <p>${p.text}</p>
     <p class="lol">${p.lol}</p>
-    <div class="btns"><button class="btn" id="back">Back to orbit 🛰️</button></div>`;
+    <div class="btns">
+      ${p.url ? `<a class="btn" href="${p.url}" target="_blank" rel="noopener">Visit ${p.site} ↗</a>` : ""}
+      <button class="btn alt" id="back">Back to orbit 🛰️</button>
+    </div>`;
   showVeil();
   $("#back").onclick = () => { hideVeil(); if (first) progress(); };
 }
@@ -317,6 +328,7 @@ function missionComplete() {
       <p class="lol">Want to build something ambitious together? Say hi.</p>
       <div class="btns">
         <a class="btn" href="https://www.linkedin.com/in/maxschalow/" target="_blank" rel="noopener">Connect on LinkedIn</a>
+        <a class="btn" href="https://www.instagram.com/max.schalow/" target="_blank" rel="noopener">Instagram 📸</a>
         <button class="btn alt" id="back">Keep floating</button>
       </div>`;
     showVeil();

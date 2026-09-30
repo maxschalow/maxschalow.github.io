@@ -3,148 +3,363 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Max Schalow</title>
-<meta name="description" content="Max Schalow — founder, operator and community builder. Co-founder of SELANA, Fleetser, bondi and Amsterdam Tech Week. Forbes 30 Under 30 Europe.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%23111'/><text x='50%25' y='56%25' text-anchor='middle' dominant-baseline='middle' font-family='Georgia,serif' font-size='34' fill='%23f4f1ea'>M</text></svg>">
+<title>Max Schalow 👨‍🚀</title>
+<meta name="description" content="Max Schalow: founder, operator and community builder. Co-founder of SELANA, Fleetser, bondi, Amsterdam Tech Week and FounderFuel. Forbes 30 Under 30 Europe.">
+<meta property="og:title" content="Max Schalow 👨‍🚀">
+<meta property="og:description" content="Houston, we have a founder. Click around to explore.">
+<meta property="og:image" content="https://maxschalow.com/max.jpg">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👨‍🚀</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #f4f1ea;
-    --ink: #151515;
-    --muted: #6b675f;
-    --line: #d9d4c8;
-    --accent: #1f4d3a;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #121312;
-      --ink: #ecebe6;
-      --muted: #9a978f;
-      --line: #2b2c2a;
-      --accent: #8fc2a8;
-    }
+    --bg: #07061a;
+    --ink: #f5f3ff;
+    --muted: #b7b2d9;
+    --yellow: #ffd23f;
+    --pink: #ff5da2;
+    --cyan: #3ee6ff;
+    --card: #15123a;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
   body {
     background: var(--bg);
     color: var(--ink);
-    font-family: Inter, system-ui, -apple-system, sans-serif;
-    font-size: 17px;
-    line-height: 1.6;
-    padding: 12vh 24px 64px;
+    font-family: "Space Grotesk", system-ui, sans-serif;
+    overflow: hidden;
     -webkit-font-smoothing: antialiased;
   }
-  main { width: 100%; max-width: 600px; margin: 0 auto; }
-  h1 {
-    font-family: Fraunces, Georgia, serif;
-    font-weight: 600;
-    font-size: clamp(2.4rem, 7vw, 3.4rem);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+  button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; }
+
+  /* ---------- stars ---------- */
+  .stars, .stars2 {
+    position: fixed; inset: -50%;
+    background-image:
+      radial-gradient(1.5px 1.5px at 20px 30px, #fff, transparent),
+      radial-gradient(1px 1px at 90px 120px, #fff, transparent),
+      radial-gradient(1.5px 1.5px at 160px 60px, #cfc9ff, transparent),
+      radial-gradient(1px 1px at 230px 190px, #fff, transparent),
+      radial-gradient(2px 2px at 300px 90px, #ffe9a8, transparent),
+      radial-gradient(1px 1px at 50px 250px, #fff, transparent);
+    background-size: 340px 300px;
+    animation: drift 120s linear infinite;
+    opacity: .8;
   }
-  .role {
-    margin-top: 10px;
-    color: var(--muted);
-    font-size: 0.95rem;
-    letter-spacing: 0.02em;
+  .stars2 { background-size: 510px 450px; animation-duration: 200s; opacity: .5; }
+  @keyframes drift { to { transform: translate(340px, 300px); } }
+
+  /* ---------- screens ---------- */
+  .screen { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; transition: opacity .6s, transform .6s; }
+  .hidden { opacity: 0; pointer-events: none; transform: scale(.96); }
+
+  /* launch pad */
+  #pad { flex-direction: column; text-align: center; padding: 24px; gap: 18px; }
+  .helmet {
+    width: 150px; height: 150px; border-radius: 50%;
+    border: 6px solid #e8e6ff;
+    box-shadow: 0 0 0 6px #6c63ff55, 0 0 60px #6c63ff88, inset 0 0 20px #0008;
+    background: url(max.jpg) center/cover, #222;
+    position: relative;
   }
-  .intro {
-    margin-top: 32px;
-    padding-top: 32px;
-    border-top: 1px solid var(--line);
+  .helmet::after {
+    content: ""; position: absolute; inset: 8px 40px auto 16px; height: 34px; border-radius: 50%;
+    background: linear-gradient(#ffffff66, transparent); transform: rotate(-20deg);
   }
-  .intro p + p { margin-top: 14px; }
-  h2 {
-    margin-top: 48px;
-    margin-bottom: 8px;
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--muted);
+  h1 { font-family: Bungee, sans-serif; font-weight: 400; font-size: clamp(2rem, 7vw, 3.6rem); line-height: 1; letter-spacing: .01em; }
+  h1 span { color: var(--yellow); }
+  .tag { color: var(--muted); font-size: 1.05rem; max-width: 30ch; }
+  .launch {
+    margin-top: 8px; font-family: Bungee, sans-serif; font-size: 1.3rem;
+    padding: 16px 34px; border-radius: 999px; background: var(--pink); color: #fff;
+    box-shadow: 0 6px 0 #b0306c, 0 0 40px #ff5da266; transition: transform .1s, box-shadow .1s;
   }
-  ul { list-style: none; }
-  li {
-    padding: 14px 0;
-    border-bottom: 1px solid var(--line);
+  .launch:hover { transform: translateY(-2px) rotate(-1deg); }
+  .launch:active { transform: translateY(4px); box-shadow: 0 2px 0 #b0306c; }
+  .tiny { font-size: .8rem; color: #8a84b8; }
+
+  /* countdown */
+  #count { font-family: Bungee, sans-serif; font-size: 30vmin; color: var(--yellow); z-index: 20; }
+  .shake { animation: shake .12s linear infinite; }
+  @keyframes shake { 25%{transform:translate(3px,-2px)} 50%{transform:translate(-3px,2px)} 75%{transform:translate(2px,3px)} }
+
+  /* ---------- space ---------- */
+  #space { overflow: hidden; }
+  .hud {
+    position: fixed; top: 16px; left: 16px; right: 16px; display: flex; justify-content: space-between; align-items: center;
+    font-size: .85rem; color: var(--muted); z-index: 5; gap: 12px;
   }
-  li:last-child { border-bottom: 0; }
-  .name { font-weight: 500; }
-  .name span { color: var(--muted); font-weight: 400; }
-  .desc { color: var(--muted); font-size: 0.95rem; margin-top: 2px; }
-  a { color: inherit; }
-  nav {
-    margin-top: 48px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
+  .hud b { color: var(--yellow); }
+  .meter { flex: 0 0 120px; height: 8px; border-radius: 99px; background: #ffffff1a; overflow: hidden; }
+  .meter i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--cyan), var(--pink)); transition: width .5s; }
+  .hint {
+    position: fixed; bottom: 18px; left: 0; right: 0; text-align: center; color: var(--muted); font-size: .9rem; z-index: 5; padding: 0 16px;
   }
-  nav a {
-    color: var(--ink);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.95rem;
-    padding: 10px 18px;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    transition: border-color .15s, color .15s;
+
+  .max {
+    position: absolute; left: 50%; top: 50%; width: clamp(110px, 22vmin, 170px); aspect-ratio: 1;
+    translate: -50% -50%; animation: bob 4s ease-in-out infinite; z-index: 3;
   }
-  nav a:hover { border-color: var(--accent); color: var(--accent); }
-  nav a.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
-  nav a.primary:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
-  footer {
-    margin-top: 56px;
-    color: var(--muted);
-    font-size: 0.8rem;
+  .max .helmet { width: 100%; height: 100%; }
+  .max:hover .helmet { box-shadow: 0 0 0 6px var(--yellow), 0 0 70px #ffd23f99; }
+  .max.spin { animation: spin .8s ease-in-out, bob 4s ease-in-out infinite .8s; }
+  @keyframes bob { 50% { transform: translateY(-12px) rotate(3deg); } }
+  @keyframes spin { to { transform: rotate(360deg) scale(1.1); } }
+
+  .bubble {
+    position: absolute; left: 50%; bottom: calc(100% + 14px); translate: -50% 0;
+    width: max-content; max-width: min(300px, 80vw); padding: 12px 16px; border-radius: 16px;
+    background: #fff; color: #15123a; font-size: .95rem; line-height: 1.4; font-weight: 500;
+    opacity: 0; transform: scale(.8); transform-origin: bottom center; transition: .2s; pointer-events: none; text-align: left;
+  }
+  .bubble::after { content: ""; position: absolute; left: 50%; top: 100%; translate: -50% 0; border: 10px solid transparent; border-top-color: #fff; }
+  .bubble.show { opacity: 1; transform: scale(1); }
+
+  .planet {
+    position: absolute; width: var(--s); aspect-ratio: 1; border-radius: 50%;
+    left: var(--x); top: var(--y); translate: -50% -50%;
+    background: radial-gradient(circle at 30% 30%, #ffffffaa, transparent 40%), var(--c);
+    box-shadow: inset -10px -12px 0 #0004, 0 0 30px color-mix(in srgb, var(--c) 60%, transparent);
+    display: grid; place-items: center; font-size: calc(var(--s) * .42);
+    animation: float var(--d) ease-in-out infinite; transition: scale .2s; z-index: 2;
+  }
+  .planet:hover { scale: 1.12; }
+  .planet.ring::before {
+    content: ""; position: absolute; inset: 38% -22%; border-radius: 50%; border: 4px solid #ffffff66; transform: rotate(-18deg); pointer-events: none;
+  }
+  .planet .q { font-family: Bungee, sans-serif; color: #fff; text-shadow: 0 2px 0 #0005; }
+  .planet .label {
+    position: absolute; top: 100%; margin-top: 6px; font-size: .75rem; font-weight: 700; white-space: nowrap;
+    background: #0009; padding: 2px 8px; border-radius: 99px; color: var(--ink);
+  }
+  .planet:not(.seen) .label { color: var(--muted); }
+  @keyframes float { 50% { transform: translateY(-10px); } }
+
+  .scooter {
+    position: absolute; top: 18%; left: -80px; font-size: 42px; z-index: 4;
+    animation: fly 9s linear infinite; animation-delay: 4s;
+  }
+  @keyframes fly { 0% { left: -80px; transform: rotate(-8deg); } 30% { transform: rotate(8deg) translateY(30px); } 60% { transform: rotate(-6deg) translateY(-10px); } 100% { left: calc(100% + 80px); transform: rotate(4deg); } }
+
+  /* ---------- card ---------- */
+  .veil { position: fixed; inset: 0; background: #05041399; backdrop-filter: blur(4px); display: grid; place-items: center; z-index: 30; padding: 16px; transition: opacity .25s; }
+  .card {
+    width: min(440px, 100%); background: var(--card); border: 2px solid #ffffff22; border-radius: 24px; padding: 28px 24px 22px;
+    box-shadow: 0 20px 60px #0008; text-align: center; animation: pop .35s cubic-bezier(.2,1.6,.4,1);
+  }
+  @keyframes pop { from { transform: scale(.6) rotate(-4deg); opacity: 0; } }
+  .card .big { font-size: 64px; line-height: 1; }
+  .card h2 { font-family: Bungee, sans-serif; font-weight: 400; font-size: 1.6rem; margin-top: 12px; }
+  .card .role { color: var(--yellow); font-weight: 700; margin-top: 4px; }
+  .card p { color: var(--ink); margin-top: 14px; line-height: 1.55; }
+  .card .lol { color: var(--muted); font-size: .9rem; font-style: italic; }
+  .card .btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+  .btn { text-decoration: none; padding: 10px 20px; border-radius: 999px; background: var(--cyan); color: #07061a; font-weight: 700; }
+  .btn.alt { background: #ffffff1a; color: var(--ink); }
+  .btn:hover { filter: brightness(1.1); }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 60px; translate: -50% 0; background: var(--yellow); color: #07061a; font-weight: 700;
+    padding: 10px 18px; border-radius: 12px; z-index: 40; transition: .3s; max-width: 90vw; text-align: center;
+  }
+  .toast.hidden { opacity: 0; transform: translateY(20px); }
+
+  .confetti { position: fixed; top: -20px; font-size: 22px; z-index: 50; pointer-events: none; animation: fall linear forwards; }
+  @keyframes fall { to { transform: translateY(110vh) rotate(720deg); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
   }
 </style>
 </head>
 <body>
-<main>
-  <h1>Max Schalow</h1>
-  <p class="role">Founder, operator &amp; community builder &middot; Forbes 30 Under 30 Europe</p>
+<div class="stars"></div><div class="stars2"></div>
 
-  <section class="intro">
-    <p>I build companies in e-mobility and help founders find each other. I started my first company as a student, and have been on a crazy journey throughout.</p>
-    <p>I've also angel invested in a few early-stage companies, and I enjoy working with founders who are building something ambitious.</p>
-  </section>
+<!-- LAUNCH PAD -->
+<section id="pad" class="screen">
+  <div class="helmet" role="img" aria-label="Max Schalow"></div>
+  <h1>Houston,<br>we have a <span>founder</span>.</h1>
+  <p class="tag">Max Schalow. Founder, operator &amp; community builder. Forbes 30 Under 30 Europe.</p>
+  <button class="launch" id="launchBtn">🚀 Launch</button>
+  <p class="tiny">No helmet required. Seatbelt recommended.</p>
+</section>
 
-  <h2>Building</h2>
-  <ul>
-    <li>
-      <div class="name">SELANA <span>&middot; Co-founder &amp; COO</span></div>
-      <div class="desc">Built the first and only street-legal e-step in the Netherlands, creating a new vehicle category after six years of type-approval work.</div>
-    </li>
-    <li>
-      <div class="name">Fleetser <span>&middot; Co-founder</span></div>
-      <div class="desc">A marketplace for buying and selling light electric vehicle fleets. 30,000+ vehicles sold.</div>
-    </li>
-    <li>
-      <div class="name">bondi <span>&middot; Co-founder &amp; COO</span></div>
-      <div class="desc">Shared e-bikes, scaled from 0 to 8 cities and 100,000 users. Acquired by Svist in 2025.</div>
-    </li>
-  </ul>
+<div id="count" class="screen hidden"></div>
 
-  <h2>Community</h2>
-  <ul>
-    <li>
-      <div class="name">Amsterdam Tech Week <span>&middot; Co-founder</span></div>
-      <div class="desc">Amsterdam's biggest startup and investor event, with 5,000+ attendees in 2026.</div>
-    </li>
-    <li>
-      <div class="name">FounderFuel <span>&middot; Co-founder</span></div>
-      <div class="desc">An invite-only community where Dutch founders and investors connect on a personal level.</div>
-    </li>
-  </ul>
+<!-- SPACE -->
+<section id="space" class="screen hidden">
+  <div class="hud">
+    <span>Planets explored: <b id="score">0</b>/6</span>
+    <div class="meter"><i id="bar"></i></div>
+  </div>
 
-  <nav>
-    <a class="primary" href="https://www.linkedin.com/in/maxschalow/" target="_blank" rel="noopener">LinkedIn</a>
-  </nav>
+  <button class="max" id="max" aria-label="Talk to Max">
+    <div class="bubble" id="bubble"></div>
+    <div class="helmet"></div>
+  </button>
 
-  <footer>&copy; <span id="y">2026</span> Max Schalow</footer>
-</main>
-<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+  <div id="planets"></div>
+
+  <button class="scooter" id="scooter" aria-label="A flying e-step">🛴</button>
+
+  <p class="hint" id="hint">Click Max. Then click the planets. Space is big, take your time.</p>
+</section>
+
+<div class="veil hidden" id="veil">
+  <div class="card" id="card" role="dialog" aria-modal="true"></div>
+</div>
+
+<div class="toast hidden" id="toast"></div>
+
+<script>
+const PLANETS = [
+  { id: "selana", emoji: "🛴", name: "SELANA", role: "Co-founder & COO", c: "#ff5da2", ring: false,
+    text: "Built the first and only street-legal e-step in the Netherlands. That meant creating a whole new vehicle category, after six years of type-approval work.",
+    lol: "Everyone said it was impossible. Turns out \"impossible\" just takes six years." },
+  { id: "fleetser", emoji: "♻️", name: "Fleetser", role: "Co-founder", c: "#3ee6ff", ring: true,
+    text: "A marketplace for buying and selling light electric vehicle fleets. 30,000+ vehicles sold.",
+    lol: "Started as a side project with basically zero investment. Whoops." },
+  { id: "bondi", emoji: "🚲", name: "bondi", role: "Co-founder & COO", c: "#7cff6b", ring: false,
+    text: "Shared e-bikes, scaled from 0 to 8 cities and 100,000 users. Acquired by Svist in 2025.",
+    lol: "Also once \"knighted\" by a prince at a founder event. Sir bondi boyz." },
+  { id: "atw", emoji: "🎪", name: "Amsterdam Tech Week", role: "Co-founder", c: "#ffd23f", ring: true,
+    text: "Amsterdam's biggest startup and investor event, with 5,000+ attendees in 2026.",
+    lol: "Inspired by Miami Tech Week. Slightly less sunburn." },
+  { id: "ff", emoji: "🍸", name: "FounderFuel", role: "Co-founder", c: "#b388ff", ring: false,
+    text: "An invite-only community where Dutch founders and investors connect on a personal level, and in a fun way.",
+    lol: "Fewer pitch decks, more cocktails." },
+  { id: "angel", emoji: "😇", name: "Angel investing", role: "Angel investor", c: "#ff9f43", ring: true,
+    text: "I've angel invested in a few early-stage companies, and I enjoy working with founders who are building something ambitious.",
+    lol: "Halo sold separately." }
+];
+
+const LINES = [
+  "Hi, I'm Max 👋 I build companies in e-mobility and help founders find each other.",
+  "I started my first company as a student, and have been on a crazy journey throughout.",
+  "Those planets? That's my career. Go on, click one.",
+  "Fun fact: I once pitched investors from the Quote 500 list. All 500. One by one.",
+  "Pro tip: free coffee at the Hilton if you act like a guest ☕",
+  "I'm not spinning, the universe is.",
+  "Okay you can stop clicking me now.",
+  "...seriously, the planets are right there 🪐"
+];
+
+const $ = s => document.querySelector(s);
+const seen = new Set();
+let line = 0, bubbleTimer, toastTimer;
+
+/* launch sequence */
+$("#launchBtn").onclick = () => {
+  $("#pad").classList.add("hidden");
+  const c = $("#count"); c.classList.remove("hidden"); c.classList.add("shake");
+  const steps = ["3", "2", "1", "🚀"]; let i = 0;
+  const tick = () => {
+    if (i < steps.length) { c.textContent = steps[i++]; setTimeout(tick, 650); }
+    else { c.classList.add("hidden"); $("#space").classList.remove("hidden"); placePlanets(); setTimeout(() => say(LINES[0]), 500); line = 1; }
+  };
+  tick();
+};
+
+/* planets on an ellipse around Max */
+function placePlanets() {
+  const wrap = $("#planets"); wrap.innerHTML = "";
+  const w = innerWidth, h = innerHeight, narrow = w < 640;
+  const rx = narrow ? 36 : 34, ry = narrow ? 33 : 32;
+  const size = Math.round(Math.max(64, Math.min(110, Math.min(w, h) * 0.14)));
+  PLANETS.forEach((p, i) => {
+    const a = (i / PLANETS.length) * Math.PI * 2 - Math.PI / 2 + 0.35;
+    const b = document.createElement("button");
+    b.className = "planet" + (p.ring ? " ring" : "") + (seen.has(p.id) ? " seen" : "");
+    b.style.cssText = `--x:${50 + rx * Math.cos(a)}%;--y:${52 + ry * Math.sin(a)}%;--s:${size}px;--c:${p.c};--d:${3 + (i % 3)}s`;
+    b.innerHTML = seen.has(p.id)
+      ? `<span>${p.emoji}</span><span class="label">${p.name}</span>`
+      : `<span class="q">?</span><span class="label">???</span>`;
+    b.setAttribute("aria-label", seen.has(p.id) ? p.name : "Unknown planet");
+    b.onclick = () => openPlanet(p);
+    wrap.appendChild(b);
+  });
+}
+addEventListener("resize", () => { if (!$("#space").classList.contains("hidden")) placePlanets(); });
+
+function openPlanet(p) {
+  const first = !seen.has(p.id);
+  seen.add(p.id);
+  $("#card").innerHTML = `
+    <div class="big">${p.emoji}</div>
+    <h2>${p.name}</h2>
+    <div class="role">${p.role}</div>
+    <p>${p.text}</p>
+    <p class="lol">${p.lol}</p>
+    <div class="btns"><button class="btn" id="back">Back to orbit 🛰️</button></div>`;
+  showVeil();
+  $("#back").onclick = () => { hideVeil(); if (first) progress(); };
+}
+
+function progress() {
+  placePlanets();
+  $("#score").textContent = seen.size;
+  $("#bar").style.width = (seen.size / PLANETS.length * 100) + "%";
+  const hints = ["Nice. 5 to go.", "Keep going, astronaut.", "Halfway there 🌗", "You're getting good at this.", "One more planet. You can do it."];
+  if (seen.size < PLANETS.length) $("#hint").textContent = hints[seen.size - 1] || "";
+  else missionComplete();
+}
+
+function missionComplete() {
+  $("#hint").textContent = "Mission complete ✅";
+  confetti();
+  setTimeout(() => {
+    $("#card").innerHTML = `
+      <div class="big">🏆</div>
+      <h2>Mission complete</h2>
+      <div class="role">You are now a certified Max Schalow expert</div>
+      <p>Founder, operator &amp; community builder. Forbes 30 Under 30 Europe. Usually found in Amsterdam, always on an e-step.</p>
+      <p class="lol">Want to build something ambitious together? Say hi.</p>
+      <div class="btns">
+        <a class="btn" href="https://www.linkedin.com/in/maxschalow/" target="_blank" rel="noopener">Connect on LinkedIn</a>
+        <button class="btn alt" id="back">Keep floating</button>
+      </div>`;
+    showVeil();
+    $("#back").onclick = hideVeil;
+  }, 900);
+}
+
+/* Max talks */
+$("#max").onclick = () => {
+  const m = $("#max"); m.classList.remove("spin"); void m.offsetWidth;
+  if (line >= 5) m.classList.add("spin");
+  say(LINES[Math.min(line, LINES.length - 1)]);
+  line++;
+};
+function say(t) {
+  const b = $("#bubble"); b.textContent = t; b.classList.add("show");
+  clearTimeout(bubbleTimer); bubbleTimer = setTimeout(() => b.classList.remove("show"), 4200);
+}
+
+/* easter egg */
+$("#scooter").onclick = () => toast("🛴 Street-legal on Dutch bike lanes. Not yet approved for orbit.");
+function toast(t) {
+  const el = $("#toast"); el.textContent = t; el.classList.remove("hidden");
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.add("hidden"), 3200);
+}
+
+/* modal helpers */
+function showVeil() { $("#veil").classList.remove("hidden"); }
+function hideVeil() { $("#veil").classList.add("hidden"); }
+$("#veil").onclick = e => { if (e.target.id === "veil") $("#back")?.click(); };
+addEventListener("keydown", e => { if (e.key === "Escape" && !$("#veil").classList.contains("hidden")) $("#back")?.click(); });
+
+function confetti() {
+  const bits = ["🎉", "⭐", "🚀", "🛴", "✨", "🪐"];
+  for (let i = 0; i < 40; i++) {
+    const s = document.createElement("span"); s.className = "confetti";
+    s.textContent = bits[i % bits.length];
+    s.style.left = Math.random() * 100 + "vw";
+    s.style.animationDuration = 2 + Math.random() * 2 + "s";
+    s.style.animationDelay = Math.random() * .6 + "s";
+    document.body.appendChild(s); setTimeout(() => s.remove(), 5000);
+  }
+}
+</script>
 </body>
 </html>

@@ -257,6 +257,13 @@
   .cty.flash { animation: flash .5s; }
   @keyframes flash { from { transform: scale(.97); box-shadow: 0 0 0 6px #ffd23f88; } }
   .cty img { display: block; width: 100%; max-height: 240px; object-fit: cover; border-radius: 10px; margin-top: 10px; }
+  .cty .pics { display: flex; gap: 8px; margin-top: 12px; overflow-x: auto; padding-bottom: 4px; }
+  .cty .pics img { margin: 0; height: 160px; width: auto; max-width: none; max-height: none; object-fit: contain; flex: none; cursor: zoom-in; border: 2px solid #ffffff22; transition: transform .15s; }
+  .cty .ai { display: block; margin-top: 6px; font-size: .75rem; color: var(--muted, #b7b2d9); }
+  .cty .pics img:hover { transform: scale(1.04) rotate(-1deg); border-color: var(--yellow); }
+  #lightbox { position: fixed; inset: 0; z-index: 50; background: #000d; display: flex; align-items: center; justify-content: center; padding: 16px; cursor: zoom-out; }
+  #lightbox img { max-width: 100%; max-height: 90vh; border-radius: 12px; box-shadow: 0 10px 40px #000; }
+  @media (max-width: 520px) { .cty .pics img { height: 120px; } }
   .chips h4 { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin: 14px 0 6px; text-align: left; }
   .chips div { display: flex; flex-wrap: wrap; gap: 6px; }
   .chip { padding: 5px 10px; border-radius: 99px; background: #ffffff12; font-size: .82rem; font-weight: 500; }
@@ -450,7 +457,7 @@ function closeCard() {
   const cb = veilOnClose; veilOnClose = null; if (cb) cb();
 }
 $("#veil").onclick = e => { if (e.target.id === "veil") closeCard(); };
-addEventListener("keydown", e => { if (e.key === "Escape") { if (!$("#veil").classList.contains("hidden")) closeCard(); else if (!$("#game").classList.contains("hidden")) closeGame(); } });
+addEventListener("keydown", e => { if (e.key === "Escape") { if ($("#lightbox")) $("#lightbox").remove(); else if (!$("#veil").classList.contains("hidden")) closeCard(); else if (!$("#game").classList.contains("hidden")) closeGame(); } });
 
 /* ============ BACKEND (Supabase REST) ============ */
 async function sb(path, opts = {}) {
@@ -700,6 +707,7 @@ const COUNTRIES = [
 // Max's comments per country go here, e.g. NOTES["528"] = { note: "Home base.", img: "img/countries/nl.jpg" }
 const NOTES = {"528": {"note": "Moved here in 2017 to study. Started at UTwente, dropped out after 3 months, then started at the HAN in Arnhem, where I started my first company. Took 7 years to finish the bachelor because I was focusing on business. I guess my mum is happy now? Great country with great people."},"276": {"note": "Spent loads of time here because I'm half German. Most summers as a kid were with my aunt and grandma."},"826": {"note": "Born and raised, but I haven't lived here in so long it doesn't feel like home."},"056": {"note": "Not my favourite country. Ghent is nice though."},"250": {"note": "Great Kanye song about this place."},"442": {"note": "Meh."},"756": {"note": "Did the last few years of high school here. Made some lifelong friends that I still meet in a random country a few times a year."},"438": {"note": "Basically the 27th canton of Switzerland."},"040": {"note": "My favourite country for snowboarding and après-ski."},"380": {"note": "Love me some pizza!"},"724": {"note": "Bag got stolen here once with my passport in it 🥲"},"620": {"note": "Used to visit a friend here often, but now he doesn't pick up my calls."},"208": {"note": "Gave our projector a Viking funeral. The glass ripped my finger open, so I ended up in hospital."},"752": {"note": "Saw Juice WRLD live here. Was blackout so I don't remember."},"578": {"note": "Beautiful country. Pricey beers."},"352": {"note": "There's a documentary about it.","link": "https://www.youtube.com/watch?v=eabxU9ozfZw","linkText": "▶ Watch it"},"616": {"note": "Been to Kraków loads, and my girlfriend is from here, so I come quite often. Great country and it's really growing."},"203": {"note": "Cheap beers!"},"703": {"note": "Visit a good friend here occasionally. His dad is an inspiration."},"348": {"note": "Came here to visit some friends while they were doing Eurail."},"642": {"note": "Exceeded my expectations. We refurbish scooters and bikes in Cluj with our partner, who's a legend."},"100": {"note": "Was so broke I couldn't afford a taxi to the airport. Went to the casino and won enough for the taxi and dinner for two."},"008": {"note": "Highly recommend: get out of Tirana and travel around. We rented a car off a random dude. He didn't check my licence or make me sign anything."},"300": {"note": "Beautiful islands."},"196": {"note": "HOT."},"792": {"note": "Need to come back for a proper visit. Had a long layover and walked around Istanbul with a backpack and long trousers in the heat."},"398": {"note": "My co-founder is from here, so we checked it out. So much to see and super vast. Go and check it out. Borat is 99% accurate."},"784": {"note": "HOT. I thought it would be lame, but it was actually super nice. Service is on another level. Bought the most expensive beer of my life in the hotel."},"156": {"note": "I love China. The people are fun, even though it's difficult to communicate, and they really want to do business. I've been quite a few times for extended periods, but I could never live there."},"764": {"note": "My friend had his bachelor party here. Amazing time. The people are so friendly and everything is crazy cheap."},"504": {"note": "Went to Fez and Chefchaouen. People were really friendly, even though I've seen the complete opposite experiences online. We couldn't find our Airbnb because there were no numbers on the doors, so someone invited us for dinner while we waited for the host."},"788": {"note": "I was a kid and all I remember is my dad buying overpriced carpets. He still gets roasted about it to this day."},"710": {"note": "Came for a conference to figure out how to sell more scooters to Africa."},"840": {"note": "The people here are fun! Love the startup world here. They're on another level."}};
 COUNTRIES.forEach(c => Object.assign(c, NOTES[c.id] || {}));
+const PICS = {"100":3,"156":3,"196":3,"203":3,"208":3,"250":3,"276":3,"300":2,"348":3,"352":3,"380":3,"398":3,"442":2,"504":3,"528":3,"578":3,"616":3,"620":3,"642":3,"703":3,"710":3,"724":3,"752":3,"756":3,"764":3,"784":3,"792":3,"826":3,"840":3,"008":3,"040":3,"056":3};
 const CBYID = Object.fromEntries(COUNTRIES.map(c => [c.id, c]));
 
 const LIFE = [
@@ -798,7 +806,8 @@ let globeSelect = null;
 function showCountry(id) {
   const c = CBYID[id]; if (!c) return;
   const box = $("#ctyInfo"); box.classList.remove("flash"); void box.offsetWidth; box.classList.add("flash");
-  box.innerHTML = `<b>${c.f} ${esc(c.n)}</b>${c.note ? `<span class="q">${esc(c.note)}</span>` : `<span class="lol">Review pending. Max is still recovering from the trip. ✍️</span>`}${c.link ? ` <a href="${c.link}" target="_blank" rel="noopener" style="color:var(--cyan);font-weight:700">${esc(c.linkText || "Link")}</a>` : ""}${c.img ? `<img src="${c.img}" alt="${esc(c.n)}">` : ""}`;
+  box.innerHTML = `<b>${c.f} ${esc(c.n)}</b>${c.note ? `<span class="q">${esc(c.note)}</span>` : `<span class="lol">Review pending. Max is still recovering from the trip. ✍️</span>`}${c.link ? ` <a href="${c.link}" target="_blank" rel="noopener" style="color:var(--cyan);font-weight:700">${esc(c.linkText || "Link")}</a>` : ""}${c.img ? `<img src="${c.img}" alt="${esc(c.n)}">` : ""}${PICS[id] ? `<div class="pics">${Array.from({ length: PICS[id] }, (_, i) => `<img src="img/countries/${id}-${i + 1}.jpg" alt="${esc(c.n)} photo ${i + 1}" loading="lazy">`).join("")}</div><span class="ai">* AI picked these from my Google Photos. Blame it, not me.</span>` : ""}`;
+  box.querySelectorAll(".pics img").forEach(im => im.onclick = () => { const lb = document.createElement("div"); lb.id = "lightbox"; const big = document.createElement("img"); big.src = im.src; big.alt = im.alt; lb.appendChild(big); lb.onclick = () => lb.remove(); document.body.appendChild(lb); });
 }
 
 function openBurger() {

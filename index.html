@@ -377,7 +377,7 @@ const LINES = [
   "Those planets? That's my career. Go on, click one.",
   "Psst. This site has secret words. Try typing one. 🔐",
   "Not everything here is business. Hit 🌴 Off-duty up top.",
-  "Fun fact: to land our first investor meetings, I emailed everyone on the Quote 500 rich list. Couldn't get through to all of them.",
+  "Fun fact: to find our first investors, I emailed everyone on the Quote 500 rich list. Landed a load of meetings, just not with all of them.",
   "Pro tip: free coffee at the Hilton if you act like a guest ☕",
   "I'm not spinning, the universe is.",
   "Okay you can stop clicking me now.",
@@ -404,7 +404,7 @@ const SECRETS = [
   { w: "hilton", hint: "Where I met my first investor. Free coffee if you act like a guest.", fx: () => { rain("☕", 35); toast("☕ Free coffee acquired. Act like a guest."); } },
   { w: "forbes", hint: "The magazine with a famous list for people under 30.", fx: () => { document.body.classList.add("gold"); rain("🏆", 20); toast("🏆 30 Under 30 mode: activated. The clock is ticking."); setTimeout(() => document.body.classList.remove("gold"), 8000); } },
   { w: "knight", hint: "What a prince turned the bondi boyz into.", fx: () => { $("#max").classList.add("crown"); say("Sir Max, if you please. 👑"); } },
-  { w: "quote", hint: "The rich list I spammed to get our first investor meetings. (Just the first word.)", fx: () => { rain("📧", 60); toast("📧 Spammed the whole Quote 500. A few meetings, 1 amazing investor. Worth it."); } },
+  { w: "quote", hint: "The rich list I spammed to get our first investor meetings. (Just the first word.)", fx: () => { rain("📧", 60); toast("📧 Spammed the whole Quote 500. Landed a load of meetings (not all of them) and 1 amazing investor. Worth it."); } },
   { w: "cowboy", hint: "What someone wore on their head at Amsterdam Tech Week.", fx: () => { $("#max").classList.add("cowboy"); say("Yeehaw 🤠 Howdy, partner."); } },
   { w: "459", hint: "My other Instagram account is just a number (plus \"st\").", fx: () => toastHTML('👀 You found my other Insta: <a href="https://www.instagram.com/459st/" target="_blank" rel="noopener">@459st</a>', 6000) },
   { w: "kazakhstan", hint: "One of my Instagram highlights, and also my co-founder's last name. 🇰🇿", fx: () => { rain("🇰🇿", 40); toast("🇰🇿 Chingiskhan approves this message."); } }
